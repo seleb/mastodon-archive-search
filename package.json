@@ -40,6 +40,7 @@
 		"analyze": "npx vite-bundle-visualizer -t sunburst"
 	},
 	"devDependencies": {
+		"@types/js-search": "^1.4.4",
 		"@typescript-eslint/eslint-plugin": "^6.13.1",
 		"@typescript-eslint/parser": "^6.13.1",
 		"eslint": "^8.41.0",
@@ -47,8 +48,10 @@
 		"eslint-config-airbnb-typescript": "^17.0.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-import": "^2.27.5",
+		"js-search": "^2.0.1",
 		"localforage": "^1.10.0",
 		"sass": "^1.71.0",
+		"tar": "^7.0.1",
 		"typescript": "^5.0.4",
 		"vite": "^5.0.4"
 	}

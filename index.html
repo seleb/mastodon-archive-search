@@ -8,17 +8,69 @@
   <meta name="theme-color" content="#000000">
   <title>TITLE</title>
   <link rel="stylesheet" href="./src/style.scss" />
+
+  <!-- GENERAL SEARCH INFO -->
+  <meta name="author" content="Sean S. LeBlanc" />
+  <meta name="copyright" content="Sean S. LeBlanc" />
+  <meta name="description" content="a basic web ui for searching your own posts from an exported archive" />
+  <link rel="canonical" href="https://seleb.github.io/mastodon-archive-search" />
+
+  <!-- OPENGRAPH TAGS -->
+  <meta property="og:title" content="mastodon-archive-search" />
+  <meta property="og:site_name" content="mastodon-archive-search" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://seleb.github.io/mastodon-archive-search" />
 </head>
 
 <body>
   <noscript>You must enable javascript to use this app.</noscript>
   <script type="module" src="/src/index.ts"></script>
-  <div id="preload" aria-busy="true"
+  <div id="preloader" aria-busy="true"
     style="display: flex; height: 100%; align-items: center; justify-content: center; text-align: center;">Loading...
   </div>
+  <main>
+    <div id="about">
+      <h1>mastodon-archive-search</h1>
+      <p>a basic web ui for searching your own posts from an exported archive</p>
+      <h2>how to use</h2>
+      <ol>
+        <li>request + download your archive (<a href="https://docs.joinmastodon.org/user/moving/#export" target="_blank" rel="noopener noreferrer">reference</a>)</li>
+        <li>extract the archive (if you're not sure how to extract <code>.tar.gz</code> files, try using 7zip or other options listed <a href="https://superuser.com/questions/215629/how-to-open-a-tar-gz-file-in-windows" target="_blank" rel="noopener noreferrer">here</a>)</li>
+        <li>add the extracted file <code>outbox.json</code> to the "archive" input below</li>
+        <li>type a query in the "search" input below</li>
+      </ol>
+      <h2>notes</h2>
+      <ul>
+        <li>this app does not collect or store any data remotely</li>
+        <li>your most recently added outbox is saved to your browser's local storage, so you only need to request + add a new archive when you want to see new posts</li>
+        <li>media previews are shown only as alt text</li>
+        <li>fields searched include:
+          <ul>
+            <li>the post text</li>
+            <li>the post content warning</li>
+            <li>the alt text of any attached media</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 
-  <input type="text" placeholder="search" />
-  <ul></ul>
+    <div class="controls">
+      <label for="archive">Archive</label><input id="archive" type="file" accept=".json" />
+      <label for="search">Search</label><input id="search" type="text" />
+      <p id="stats"></p>
+    </div>
+    <ul id="results">
+      <li class="null">Search results will be displayed here</li>
+    </ul>
+  </main>
+
+  <footer>
+    <span>mastodon-archive-search <a href="https://github.com/seleb/mastodon-archive-search/blob/main/CHANGELOG.md"
+        target="_blank" rel="noopener noreferrer">vVERSION</a></span>
+    <span><a href="https://github.com/seleb/mastodon-archive-search" target="_blank"
+        rel="noopener noreferrer">source</a></span>
+    <span>made by <a href="https://seans.site" target="_blank" rel="noopener noreferrer">sean</a></span>
+  </footer>
 </body>
 
 </html>

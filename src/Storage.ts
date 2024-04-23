@@ -1,5 +1,6 @@
 import localForage from 'localforage';
 import pkg from '../package.json';
+import { Outbox } from './outbox';
 
 localForage.config({
 	name: pkg.name,
@@ -8,14 +9,21 @@ localForage.config({
 });
 const storage = localForage;
 
-type State = {};
-const initialState: State = {};
+type State = {
+	outbox: null | Outbox;
+};
+const initialState: State = {
+	outbox: null,
+};
 
-const internalState: State = {};
+const internalState: State = {
+	outbox: null,
+};
 
 export async function init() {
 	const saved = await storage.getItem<State>('storage');
 	if (saved) {
+		internalState.outbox = saved.outbox;
 	}
 }
 
@@ -28,4 +36,6 @@ export function set<K extends keyof State, V extends State[K]>(k: K, v: V) {
 	storage.setItem('storage', internalState);
 }
 
-export function reset() {}
+export function reset() {
+	set('outbox', initialState.outbox);
+}
