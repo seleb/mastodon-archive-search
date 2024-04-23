@@ -1,0 +1,55 @@
+{
+	"private": true,
+	"name": "mastodon-archive-search",
+	"version": "1.0.0",
+	"description": "a basic web ui for searching your own posts from an exported archive",
+	"author": "Sean S. LeBlanc <sean.s.leblanc@gmail.com>",
+	"license": "MIT",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/seleb/mastodon-archive-search.git"
+	},
+	"release": {
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			"@semantic-release/changelog",
+			"@semantic-release/npm",
+			"@semantic-release/github",
+			[
+				"@semantic-release/git",
+				{
+					"assets": [
+						"docs/**/*",
+						"CHANGELOG.md",
+						"package.json",
+						"package-lock.json"
+					]
+				}
+			]
+		]
+	},
+	"scripts": {
+		"start": "vite",
+		"build": "vite build",
+		"serve": "vite preview --port 80",
+		"start:prod": "npm run build && npm run serve",
+		"lint": "eslint \"**/*.{js,ts}\"",
+		"typecheck": "tsc --skipLibCheck",
+		"analyze": "npx vite-bundle-visualizer -t sunburst"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^6.13.1",
+		"@typescript-eslint/parser": "^6.13.1",
+		"eslint": "^8.41.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-airbnb-typescript": "^17.0.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-import": "^2.27.5",
+		"localforage": "^1.10.0",
+		"sass": "^1.71.0",
+		"typescript": "^5.0.4",
+		"vite": "^5.0.4"
+	}
+}
