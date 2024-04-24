@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/seleb/mastodon-archive-search/compare/v1.0.2...v1.0.3) (2024-04-24)
+
+
+### Bug Fixes
+
+* disable success comment/fail title ([1b5a3fb](https://github.com/seleb/mastodon-archive-search/commit/1b5a3fb17653d226e48d9ec9c6c9678c4fad9602))
+
 ## [1.0.2](https://github.com/seleb/mastodon-archive-search/compare/v1.0.1...v1.0.2) (2024-04-24)
 
 
