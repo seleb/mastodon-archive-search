@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/seleb/mastodon-archive-search/compare/v1.0.5...v1.1.0) (2024-04-24)
+
+
+### Features
+
+* use actual search input element ([64b5004](https://github.com/seleb/mastodon-archive-search/commit/64b500450518737a36edd54a28a168097e805298))
+
 ## [1.0.5](https://github.com/seleb/mastodon-archive-search/compare/v1.0.4...v1.0.5) (2024-04-24)
 
 
