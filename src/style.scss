@@ -39,6 +39,27 @@ label {
 	cursor: pointer;
 }
 
+input[type="search"] {
+	color: inherit;
+	display: block;
+	box-sizing: border-box;
+	min-height: 2em;
+	min-width: 2em;
+	max-width: 100%;
+	width: 100%;
+	padding: 0.5rem;
+	font-size: 1em;
+	font-family: monospace;
+	background-color: var(--light-glass);
+	border: solid 1px transparent;
+	border-radius: 0.25rem;
+	tab-size: 2;
+
+	&:invalid {
+		border-color: #f00;
+	}
+}
+
 p,
 span,
 li {

@@ -5,8 +5,9 @@ import { OrderedItem, Outbox } from './outbox';
 (async () => {
 	const elFileInput =
 		document.querySelector<HTMLInputElement>('input[type="file"]');
-	const elSearchInput =
-		document.querySelector<HTMLInputElement>('input[type="text"]');
+	const elSearchInput = document.querySelector<HTMLInputElement>(
+		'input[type="search"]'
+	);
 	const elList = document.querySelector<HTMLUListElement>('#results');
 	const elStats = document.querySelector<HTMLParagraphElement>('#stats');
 	if (!elFileInput || !elSearchInput || !elList || !elStats)
