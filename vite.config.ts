@@ -16,7 +16,7 @@ const htmlReplaceTitlePlugin: Plugin = {
 export default defineConfig({
 	base: './',
 	build: {
-		// assetsInlineLimit: Infinity,
+		outDir: './docs',
 	},
 	server: {
 		port: 80,
