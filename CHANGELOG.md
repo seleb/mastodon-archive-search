@@ -1,3 +1,12 @@
+## [1.0.5](https://github.com/seleb/mastodon-archive-search/compare/v1.0.4...v1.0.5) (2024-04-24)
+
+
+### Bug Fixes
+
+* error type safety ([309f78c](https://github.com/seleb/mastodon-archive-search/commit/309f78c779a81a9c020b1a0cced8ce082317b018))
+* noscript location ([71c8bfd](https://github.com/seleb/mastodon-archive-search/commit/71c8bfdde6c3529017d5274af86a199c055cd4d9))
+* search input placeholder ([98dfae1](https://github.com/seleb/mastodon-archive-search/commit/98dfae1947d22b1e882db39337a2bb2be9325045))
+
 ## [1.0.4](https://github.com/seleb/mastodon-archive-search/compare/v1.0.3...v1.0.4) (2024-04-24)
 
 
