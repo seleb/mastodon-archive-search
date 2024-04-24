@@ -24,13 +24,13 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - uses: cycjimmy/semantic-release-action@v3
+      - uses: cycjimmy/semantic-release-action@v4
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          semantic_version: 18.0.1
+          semantic_version: 21.x
           extra_plugins: |
-            @semantic-release/changelog@6.0.1
-            @semantic-release/git@10.0.1
+            @semantic-release/changelog@6.x
+            @semantic-release/git@10.x
           branches: main
