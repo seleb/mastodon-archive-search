@@ -31,6 +31,7 @@
 		]
 	},
 	"scripts": {
+		"postversion": "npm run build",
 		"start": "vite",
 		"build": "vite build",
 		"serve": "vite preview --port 80",
