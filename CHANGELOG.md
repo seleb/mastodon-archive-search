@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/seleb/mastodon-archive-search/compare/v1.0.3...v1.0.4) (2024-04-24)
+
+
+### Bug Fixes
+
+* build dir ([4b6f919](https://github.com/seleb/mastodon-archive-search/commit/4b6f9196666e8a8354304ef2501a932843b6e33e))
+
 ## [1.0.3](https://github.com/seleb/mastodon-archive-search/compare/v1.0.2...v1.0.3) (2024-04-24)
 
 
