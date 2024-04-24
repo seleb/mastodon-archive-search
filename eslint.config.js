@@ -8,7 +8,7 @@ import eslintPluginImport from 'eslint-plugin-import';
 export default [
 	{
 		files: ['**/*.{js,ts}'],
-		ignores: ['dist/**'],
+		ignores: ['docs/**'],
 		plugins: {
 			import: eslintPluginImport,
 			'@typescript-eslint': eslintPluginTypescript,
