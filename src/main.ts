@@ -48,9 +48,11 @@ import { OrderedItem, Outbox } from './outbox';
 			elSearchInput.value = '';
 			handleSearch('');
 		} catch (err) {
+			let message = 'unknown error';
+			if (err instanceof Error) message = err.message;
 			error('Failed to load outbox', err);
 			elList.innerHTML = `<li class="null error">Failed to load outbox: ${
-				err.message || 'unknown error'
+				message || 'unknown error'
 			}</li>`;
 		}
 	};
@@ -102,9 +104,11 @@ import { OrderedItem, Outbox } from './outbox';
 				elList.appendChild(li);
 			});
 		} catch (err) {
+			let message = 'unknown error';
+			if (err instanceof Error) message = err.message;
 			error('Failed to search', err);
 			elList.innerHTML = `<li class="null error">Failed to search: ${
-				err.message || 'unknown error'
+				message || 'unknown error'
 			}</li>`;
 		}
 	};
