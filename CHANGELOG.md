@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/seleb/mastodon-archive-search/compare/v1.3.0...v1.3.1) (2024-05-09)
+
+
+### Bug Fixes
+
+* icon ([f54149f](https://github.com/seleb/mastodon-archive-search/commit/f54149fa39f29be35f302a46048b4ea1f9f782e5))
+
 # [1.3.0](https://github.com/seleb/mastodon-archive-search/compare/v1.2.0...v1.3.0) (2024-05-09)
 
 
