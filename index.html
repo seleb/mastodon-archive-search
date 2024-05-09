@@ -58,6 +58,12 @@
     <div class="controls">
       <label for="archive">Archive</label><input id="archive" type="file" accept=".json" />
       <label for="search">Search</label><input id="search" type="search" placeholder="must be at least 3 characters" minlength="3" />
+      <label for="sort">Sort</label>
+      <select name="sort">
+        <option>relevance</option>
+        <option>latest first</option>
+        <option>oldest first</option>
+      </select>
       <p id="stats"></p>
     </div>
     <ul id="results">

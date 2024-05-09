@@ -39,7 +39,12 @@ label {
 	cursor: pointer;
 }
 
-input[type="search"] {
+label {
+	text-align: right;
+}
+
+input[type="search"],
+select {
 	color: inherit;
 	display: block;
 	box-sizing: border-box;
@@ -57,6 +62,11 @@ input[type="search"] {
 
 	&:invalid {
 		border-color: #f00;
+	}
+
+	option {
+		color: inherit;
+		background-color: inherit;
 	}
 }
 

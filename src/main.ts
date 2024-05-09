@@ -9,9 +9,10 @@ import { OrderedItem, Outbox } from './outbox';
 	const elSearchInput = document.querySelector<HTMLInputElement>(
 		'input[type="search"]'
 	);
+	const elSort = document.querySelector<HTMLSelectElement>('select');
 	const elList = document.querySelector<HTMLUListElement>('#results');
 	const elStats = document.querySelector<HTMLParagraphElement>('#stats');
-	if (!elFileInput || !elSearchInput || !elList || !elStats)
+	if (!elFileInput || !elSearchInput || !elSort || !elList || !elStats)
 		throw new Error('could not find elements');
 
 	let search = new Search('id');
@@ -82,6 +83,12 @@ import { OrderedItem, Outbox } from './outbox';
 				elList.innerHTML = `<li class="null">No results found for search "${q}"</li>`;
 				return;
 			}
+			const sort = elSort.value;
+			if (sort === 'latest first')
+				result.sort((a, b) => b.published.localeCompare(a.published));
+			else if (sort === 'oldest first')
+				result.sort((a, b) => a.published.localeCompare(b.published));
+
 			result.forEach((i) => {
 				const li = document.createElement('li');
 				const a = document.createElement('a');
@@ -139,4 +146,5 @@ import { OrderedItem, Outbox } from './outbox';
 		handleOutbox(outbox);
 	});
 	elSearchInput.addEventListener('input', handleSearch);
+	elSort.addEventListener('change', handleSearch);
 })();
