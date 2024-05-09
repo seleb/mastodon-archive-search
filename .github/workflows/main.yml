@@ -8,7 +8,19 @@ on:
 concurrency:
   group: ${{ github.workflow }}
 
+env:
+  DISCORD_USERNAME: ${{ github.repository }}
+  DISCORD_AVATAR: https://raw.githubusercontent.com/${{ github.repository }}/main/src/assets/icon.png
+
 jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Ilshidur/action-discord@0.3.2
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[{ "color": 16426275, "title": "deploying...", "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }]'
+
   release:
     permissions:
       contents: write
@@ -34,3 +46,19 @@ jobs:
             @semantic-release/changelog@6.x
             @semantic-release/git@10.x
           branches: main
+
+  notify-finished:
+    if: ${{ success() || failure() }}
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Ilshidur/action-discord@0.3.2
+        if: ${{ success() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[{ "color": 2357925, "title": "${{ needs.get-release.outputs.version }} deployed", "url": "https://seleb.github.io/mastodon-archive-search" }]'
+      - uses: Ilshidur/action-discord@0.3.2
+        if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[{ "color": 16393080, "title": "failed", "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }]'
