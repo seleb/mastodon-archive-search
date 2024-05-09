@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/seleb/mastodon-archive-search/compare/v1.3.3...v1.3.4) (2024-05-09)
+
+
+### Bug Fixes
+
+* twitter card title ([97cecf0](https://github.com/seleb/mastodon-archive-search/commit/97cecf0a8df5e9d9ecfa6c2ef732d8c64b484538))
+
 ## [1.3.3](https://github.com/seleb/mastodon-archive-search/compare/v1.3.2...v1.3.3) (2024-05-09)
 
 
