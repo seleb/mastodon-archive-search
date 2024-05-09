@@ -161,6 +161,21 @@ footer {
 			}
 		}
 
+		mark {
+			color: inherit;
+			background-color: rgba(255 255 0 / 0.25);
+
+			&.exact {
+				color: #000;
+				background-color: rgb(255 255 0);
+
+				mark {
+					color: unset;
+					background-color: unset;
+				}
+			}
+		}
+
 		div {
 			&::before {
 				content: '📷 ';

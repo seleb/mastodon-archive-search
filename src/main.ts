@@ -3,10 +3,6 @@ import { get, set } from './Storage';
 import { error } from './logger';
 import { OrderedItem, Outbox } from './outbox';
 
-function highlight(source: string, term: string) {
-	return source.replaceAll(term, `<mark>${term}</mark>`);
-}
-
 (async () => {
 	const elFileInput =
 		document.querySelector<HTMLInputElement>('input[type="file"]');
@@ -63,6 +59,15 @@ function highlight(source: string, term: string) {
 		}
 	};
 
+	const highlight = (source: string, term: string) => {
+		const termTokens = search.tokenizer.tokenize(term);
+		let result = source.replaceAll(term, `<mark class="exact">${term}</mark>`);
+		termTokens.forEach((tt) => {
+			result = result.replaceAll(tt, `<mark>${tt}</mark>`);
+		});
+		return result;
+	};
+
 	const handleSearch = (q: string) => {
 		try {
 			Array.from(elList.children).forEach((i) => i.remove());
@@ -83,11 +88,12 @@ function highlight(source: string, term: string) {
 				a.href = i.object.id;
 				a.target = '_blank';
 				a.rel = 'noreferrer nofollow noopener';
-				li.innerHTML = highlight(i.object.content, q);
+				li.innerHTML = highlight(i.object.content || '', q);
 				i.object.attachment.forEach((img) => {
 					const elImg = document.createElement('div');
 					elImg.innerHTML =
-						highlight(img.name, q) || 'Media with no provided descriptive text';
+						highlight(img.name || '', q) ||
+						'Media with no provided descriptive text';
 					li.appendChild(elImg);
 				});
 				if (i.object.summary) {
