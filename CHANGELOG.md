@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/seleb/mastodon-archive-search/compare/v1.3.2...v1.3.3) (2024-05-09)
+
+
+### Bug Fixes
+
+* html templating ([c2fbb26](https://github.com/seleb/mastodon-archive-search/commit/c2fbb26b558a4943a949941ab7194ed724ec452c))
+
 ## [1.3.2](https://github.com/seleb/mastodon-archive-search/compare/v1.3.1...v1.3.2) (2024-05-09)
 
 
