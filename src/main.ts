@@ -48,7 +48,7 @@ import { OrderedItem, Outbox } from './outbox';
 			search.addDocuments(data);
 			set('outbox', outbox);
 			elSearchInput.value = '';
-			handleSearch('');
+			handleSearch();
 		} catch (err) {
 			let message = 'unknown error';
 			if (err instanceof Error) message = err.message;
@@ -68,8 +68,9 @@ import { OrderedItem, Outbox } from './outbox';
 		return result;
 	};
 
-	const handleSearch = (q: string) => {
+	const handleSearch = () => {
 		try {
+			const q = elSearchInput.value;
 			Array.from(elList.children).forEach((i) => i.remove());
 			if (q.length < 3) {
 				elList.innerHTML =
@@ -137,7 +138,5 @@ import { OrderedItem, Outbox } from './outbox';
 		const outbox = JSON.parse(await file.text());
 		handleOutbox(outbox);
 	});
-	elSearchInput.addEventListener('input', () => {
-		handleSearch(elSearchInput.value);
-	});
+	elSearchInput.addEventListener('input', handleSearch);
 })();
