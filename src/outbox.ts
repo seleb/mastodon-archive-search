@@ -21,13 +21,13 @@ export interface OrderedItem {
 			width: number;
 			height: number;
 			mediaType: string;
-			name: string;
+			name: string | null;
 			type: string;
 			url: string;
 		}[];
 		attributedTo: string;
 		cc: string[];
-		content: string;
+		content: string | null;
 		contentMap: {
 			[local: string]: string;
 		};
