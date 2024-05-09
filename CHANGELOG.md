@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/seleb/mastodon-archive-search/compare/v1.3.1...v1.3.2) (2024-05-09)
+
+
+### Bug Fixes
+
+* link preview ([c99deac](https://github.com/seleb/mastodon-archive-search/commit/c99deacd23f14de966861e103e97604e0711622c))
+
 ## [1.3.1](https://github.com/seleb/mastodon-archive-search/compare/v1.3.0...v1.3.1) (2024-05-09)
 
 
