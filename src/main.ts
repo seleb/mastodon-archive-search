@@ -3,6 +3,18 @@ import { get, set } from './Storage';
 import { error } from './logger';
 import { OrderedItem, Outbox } from './outbox';
 
+// based on https://stackoverflow.com/a/7313467
+function caseInsensitiveReplaceAll(
+	source: string,
+	term: string,
+	replaceWith: string
+) {
+	return source.replace(
+		new RegExp(`(${term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'ig'),
+		replaceWith
+	);
+}
+
 (async () => {
 	const elFileInput =
 		document.querySelector<HTMLInputElement>('input[type="file"]');
@@ -62,9 +74,13 @@ import { OrderedItem, Outbox } from './outbox';
 
 	const highlight = (source: string, term: string) => {
 		const termTokens = search.tokenizer.tokenize(term);
-		let result = source.replaceAll(term, `<mark class="exact">${term}</mark>`);
+		let result = caseInsensitiveReplaceAll(
+			source,
+			term,
+			`<mark class="exact">$1</mark>`
+		);
 		termTokens.forEach((tt) => {
-			result = result.replaceAll(tt, `<mark>${tt}</mark>`);
+			result = caseInsensitiveReplaceAll(result, tt, `<mark>$1</mark>`);
 		});
 		return result;
 	};
