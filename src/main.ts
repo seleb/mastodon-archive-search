@@ -107,10 +107,7 @@ import { OrderedItem, Outbox } from './outbox';
 				if (i.object.summary) {
 					const details = document.createElement('details');
 					const summary = document.createElement('summary');
-					summary.innerHTML = i.object.summary.replaceAll(
-						q,
-						`<mark>${q}</mark>`
-					);
+					summary.innerHTML = highlight(i.object.summary || '', q);
 					details.innerHTML = li.innerHTML;
 					li.textContent = '';
 					details.prepend(summary);
