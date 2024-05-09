@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/seleb/mastodon-archive-search/compare/v1.2.0...v1.3.0) (2024-05-09)
+
+
+### Bug Fixes
+
+* case-insensitive highlighting ([216b65c](https://github.com/seleb/mastodon-archive-search/commit/216b65cfcd06256a48f0f1c1626429e99d8b2360))
+* content summaries not properly highlighted ([6ddaafa](https://github.com/seleb/mastodon-archive-search/commit/6ddaafa4d0d0c74aa6db5e6f52261719a2647230))
+
+
+### Features
+
+* add date-based sort options ([39b17b0](https://github.com/seleb/mastodon-archive-search/commit/39b17b028f05a3fa1d09a7721daf9223eb8a81ca))
+
 # [1.2.0](https://github.com/seleb/mastodon-archive-search/compare/v1.1.0...v1.2.0) (2024-05-09)
 
 

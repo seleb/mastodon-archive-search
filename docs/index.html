@@ -19,8 +19,8 @@
   <meta property="og:site_name" content="mastodon-archive-search" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://seleb.github.io/mastodon-archive-search" />
-  <script type="module" crossorigin src="./assets/index-BEMjDm4i.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-C4YH5pIW.css">
+  <script type="module" crossorigin src="./assets/index-DMxu62b5.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Dj5ND-hB.css">
 </head>
 
 <body>
@@ -58,6 +58,12 @@
     <div class="controls">
       <label for="archive">Archive</label><input id="archive" type="file" accept=".json" />
       <label for="search">Search</label><input id="search" type="search" placeholder="must be at least 3 characters" minlength="3" />
+      <label for="sort">Sort</label>
+      <select name="sort">
+        <option>relevance</option>
+        <option>latest first</option>
+        <option>oldest first</option>
+      </select>
       <p id="stats"></p>
     </div>
     <ul id="results">
@@ -67,7 +73,7 @@
 
   <footer>
     <span>mastodon-archive-search <a href="https://github.com/seleb/mastodon-archive-search/blob/main/CHANGELOG.md"
-        target="_blank" rel="noopener noreferrer">v1.2.0</a></span>
+        target="_blank" rel="noopener noreferrer">v1.3.0</a></span>
     <span><a href="https://github.com/seleb/mastodon-archive-search" target="_blank"
         rel="noopener noreferrer">source</a></span>
     <span>made by <a href="https://seans.site" target="_blank" rel="noopener noreferrer">sean</a></span>
