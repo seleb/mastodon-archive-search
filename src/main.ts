@@ -80,8 +80,9 @@ import { OrderedItem, Outbox } from './outbox';
 				a.rel = 'noreferrer nofollow noopener';
 				li.innerHTML = i.object.content.replaceAll(q, `<mark>${q}</mark>`);
 				i.object.attachment.forEach((img) => {
-					const elImg = document.createElement('img');
-					elImg.alt = img.name || 'Media with no provided descriptive text';
+					const elImg = document.createElement('div');
+					elImg.textContent =
+						img.name || 'Media with no provided descriptive text';
 					li.appendChild(elImg);
 				});
 				if (i.object.summary) {

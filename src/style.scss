@@ -161,7 +161,11 @@ footer {
 			}
 		}
 
-		img {
+		div {
+			&::before {
+				content: '📷 ';
+			}
+
 			display: block;
 			width: 100%;
 			height: unset;
