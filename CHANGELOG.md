@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/seleb/mastodon-archive-search/compare/v1.1.0...v1.2.0) (2024-05-09)
+
+
+### Bug Fixes
+
+* alt text respects whitespace ([30304fc](https://github.com/seleb/mastodon-archive-search/commit/30304fcd2d6d822d60881ccd398ff16984b4db9f))
+
+
+### Features
+
+* allow img alt text to be selected ([41ad3c4](https://github.com/seleb/mastodon-archive-search/commit/41ad3c46e6ea7c74e3de8665b7fc84cbac0958bb))
+* img alt is highlighted with search term ([dacd404](https://github.com/seleb/mastodon-archive-search/commit/dacd4049222db2b3348e979f5720f95dd5d92d10))
+* individual token matches are also subtly highlighted ([b6097c4](https://github.com/seleb/mastodon-archive-search/commit/b6097c4e328390ce4e20da26859736aea779d13d))
+
 # [1.1.0](https://github.com/seleb/mastodon-archive-search/compare/v1.0.5...v1.1.0) (2024-04-24)
 
 
