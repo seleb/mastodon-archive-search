@@ -1,14 +1,15 @@
 import { Plugin, defineConfig } from 'vite';
 import pkg from './package.json';
 
-const htmlReplaceTitlePlugin: Plugin = {
+const htmlReplacePlugin: Plugin = {
 	name: 'transform-html',
 	transformIndexHtml: {
 		order: 'pre',
 		handler(html: string) {
 			return html
-				.replace('<title>TITLE</title>', `<title>${pkg.name}</title>`)
-				.replace('>vVERSION</a>', `>v${pkg.version}</a>`);
+				.replaceAll('%TITLE%', pkg.name)
+				.replaceAll('%DESCRIPTION%', pkg.description)
+				.replaceAll('%VERSION%', pkg.version);
 		},
 	},
 };
@@ -21,5 +22,5 @@ export default defineConfig({
 	server: {
 		port: 80,
 	},
-	plugins: [htmlReplaceTitlePlugin],
+	plugins: [htmlReplacePlugin],
 });
