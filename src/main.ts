@@ -2,6 +2,11 @@ import { Search } from 'js-search';
 import { get, set } from './Storage';
 import { error } from './logger';
 import { OrderedItem, Outbox } from './outbox';
+
+function highlight(source: string, term: string) {
+	return source.replaceAll(term, `<mark>${term}</mark>`);
+}
+
 (async () => {
 	const elFileInput =
 		document.querySelector<HTMLInputElement>('input[type="file"]');
@@ -78,11 +83,11 @@ import { OrderedItem, Outbox } from './outbox';
 				a.href = i.object.id;
 				a.target = '_blank';
 				a.rel = 'noreferrer nofollow noopener';
-				li.innerHTML = i.object.content.replaceAll(q, `<mark>${q}</mark>`);
+				li.innerHTML = highlight(i.object.content, q);
 				i.object.attachment.forEach((img) => {
 					const elImg = document.createElement('div');
-					elImg.textContent =
-						img.name || 'Media with no provided descriptive text';
+					elImg.innerHTML =
+						highlight(img.name, q) || 'Media with no provided descriptive text';
 					li.appendChild(elImg);
 				});
 				if (i.object.summary) {
