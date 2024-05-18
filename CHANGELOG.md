@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/seleb/mastodon-archive-search/compare/v1.3.4...v1.3.5) (2024-05-18)
+
+
+### Bug Fixes
+
+* version display in footer ([0a4727d](https://github.com/seleb/mastodon-archive-search/commit/0a4727d64a80294a4bb4c685216d34b1adafe5fb))
+
 ## [1.3.4](https://github.com/seleb/mastodon-archive-search/compare/v1.3.3...v1.3.4) (2024-05-09)
 
 
