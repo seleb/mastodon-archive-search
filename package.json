@@ -58,7 +58,6 @@
 		"js-search": "^2.0.1",
 		"localforage": "^1.10.0",
 		"sass": "^1.71.0",
-		"tar": "^7.0.1",
 		"typescript": "^5.0.4",
 		"vite": "^5.0.4"
 	}
