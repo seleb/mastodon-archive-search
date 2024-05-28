@@ -55,6 +55,11 @@ function caseInsensitiveReplaceAll(
 				updated
 			).toDateString()}</time>`;
 			search = new Search('id');
+			search.tokenizer = {
+				tokenize(text: string) {
+					return text.split(/\s/).filter((i) => i);
+				},
+			};
 			search.addIndex(['object', 'content']);
 			search.addIndex(['object', 'summary']);
 			search.addIndex(['object', 'alt']);
