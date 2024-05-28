@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/seleb/mastodon-archive-search/compare/v1.3.5...v1.3.6) (2024-05-28)
+
+
+### Bug Fixes
+
+* more permissive tokenizer ([3997227](https://github.com/seleb/mastodon-archive-search/commit/399722773b791804553cc5bbe0c268b2fb5ce8fd))
+
 ## [1.3.5](https://github.com/seleb/mastodon-archive-search/compare/v1.3.4...v1.3.5) (2024-05-18)
 
 
