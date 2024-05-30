@@ -6,11 +6,16 @@ import { OrderedItem, Outbox } from './outbox';
 // based on https://stackoverflow.com/a/7313467
 function caseInsensitiveReplaceAll(
 	source: string,
-	term: string,
+	terms: string[],
 	replaceWith: string
 ) {
 	return source.replace(
-		new RegExp(`(${term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'ig'),
+		new RegExp(
+			`(${terms
+				.map((i) => i.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
+				.join('|')})`,
+			'ig'
+		),
 		replaceWith
 	);
 }
@@ -77,17 +82,46 @@ function caseInsensitiveReplaceAll(
 		}
 	};
 
-	const highlight = (source: string, term: string) => {
-		const termTokens = search.tokenizer.tokenize(term);
-		let result = caseInsensitiveReplaceAll(
-			source,
-			term,
-			`<mark class="exact">$1</mark>`
-		);
-		termTokens.forEach((tt) => {
-			result = caseInsensitiveReplaceAll(result, tt, `<mark>$1</mark>`);
+	function getTextNodesIn(node: Element, includeWhitespaceNodes: boolean) {
+		const textNodes: Text[] = [],
+			whitespace = /^\s*$/;
+
+		function getTextNodes(node: Node) {
+			if (node.nodeType == 3) {
+				if (includeWhitespaceNodes || !whitespace.test(node.nodeValue || '')) {
+					textNodes.push(node as Text);
+				}
+			} else {
+				for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+					getTextNodes(node.childNodes[i]);
+				}
+			}
+		}
+
+		getTextNodes(node);
+		return textNodes;
+	}
+	const enhanceNodes = (
+		textNodes: Text[],
+		enhance: (text: string) => string
+	) => {
+		textNodes.forEach((node) => {
+			const oldText = node.textContent;
+			const newText = enhance(oldText || '');
+			const fragment = document.createRange().createContextualFragment(newText);
+			node.replaceWith(fragment);
 		});
-		return result;
+	};
+	const highlight = (source: Element, term: string) => {
+		const termTokens = search.tokenizer.tokenize(term);
+		let nodes = getTextNodesIn(source, true);
+		enhanceNodes(nodes, (text) =>
+			caseInsensitiveReplaceAll(text, [term], `<mark class="exact">$1</mark>`)
+		);
+		nodes = getTextNodesIn(source, true);
+		enhanceNodes(nodes, (text) =>
+			caseInsensitiveReplaceAll(text, termTokens, `<mark>$1</mark>`)
+		);
 	};
 
 	const handleSearch = () => {
@@ -117,18 +151,21 @@ function caseInsensitiveReplaceAll(
 				a.href = i.object.id;
 				a.target = '_blank';
 				a.rel = 'noreferrer nofollow noopener';
-				li.innerHTML = highlight(i.object.content || '', q);
+				li.innerHTML = i.object.content || '';
+				highlight(li, q);
 				i.object.attachment.forEach((img) => {
 					const elImg = document.createElement('div');
+					elImg.innerHTML = img.name || '';
+					highlight(elImg, q);
 					elImg.innerHTML =
-						highlight(img.name || '', q) ||
-						'Media with no provided descriptive text';
+						elImg.innerHTML || 'Media with no provided descriptive text';
 					li.appendChild(elImg);
 				});
 				if (i.object.summary) {
 					const details = document.createElement('details');
 					const summary = document.createElement('summary');
-					summary.innerHTML = highlight(i.object.summary || '', q);
+					summary.innerHTML = i.object.summary || '';
+					highlight(summary, q);
 					details.innerHTML = li.innerHTML;
 					li.textContent = '';
 					details.prepend(summary);
