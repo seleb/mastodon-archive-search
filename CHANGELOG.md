@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/seleb/mastodon-archive-search/compare/v1.3.6...v1.3.7) (2024-05-30)
+
+
+### Bug Fixes
+
+* search highlight breaking html ([7a4ac9e](https://github.com/seleb/mastodon-archive-search/commit/7a4ac9e8fb2ec0dd457425835c501d16345b9b32))
+
 ## [1.3.6](https://github.com/seleb/mastodon-archive-search/compare/v1.3.5...v1.3.6) (2024-05-28)
 
 
