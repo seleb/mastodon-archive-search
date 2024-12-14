@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/seleb/mastodon-archive-search/compare/v1.3.7...v1.4.0) (2024-12-14)
+
+
+### Features
+
+* show number of matching posts ([bda4fe5](https://github.com/seleb/mastodon-archive-search/commit/bda4fe5fc5b6e7c6157d9b0445942baa664ec1b0))
+
 ## [1.3.7](https://github.com/seleb/mastodon-archive-search/compare/v1.3.6...v1.3.7) (2024-05-30)
 
 
