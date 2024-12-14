@@ -29,6 +29,7 @@ function caseInsensitiveReplaceAll(
 	const elSort = document.querySelector<HTMLSelectElement>('select');
 	const elList = document.querySelector<HTMLUListElement>('#results');
 	const elStats = document.querySelector<HTMLParagraphElement>('#stats');
+	let elCount: HTMLSpanElement | null = null;
 	if (!elFileInput || !elSearchInput || !elSort || !elList || !elStats)
 		throw new Error('could not find elements');
 
@@ -54,11 +55,12 @@ function caseInsensitiveReplaceAll(
 					'could not find any posts, double check that your outbox file is correct'
 				);
 			const updated = data[data.length - 1]?.object.published || 0;
-			elStats.innerHTML = `${
+			elStats.innerHTML = `<span id="count">${data.length}</span> of ${
 				data.length
 			} posts, latest: <time datatime="${updated}">${new Date(
 				updated
 			).toDateString()}</time>`;
+			elCount = document.querySelector<HTMLSpanElement>('#count');
 			search = new Search('id');
 			search.tokenizer = {
 				tokenize(text: string) {
@@ -131,11 +133,13 @@ function caseInsensitiveReplaceAll(
 			if (q.length < 3) {
 				elList.innerHTML =
 					'<li class="null">Search results will be displayed here</li>';
+				if (elCount) elCount.textContent = '0';
 				return;
 			}
 			const result = search.search(q) as OrderedItem[];
 			if (!result.length) {
 				elList.innerHTML = `<li class="null">No results found for search "${q}"</li>`;
+				if (elCount) elCount.textContent = '0';
 				return;
 			}
 			const sort = elSort.value;
@@ -179,6 +183,7 @@ function caseInsensitiveReplaceAll(
 				li.prepend(a);
 				elList.appendChild(li);
 			});
+			if (elCount) elCount.textContent = result.length.toString(10);
 		} catch (err) {
 			let message = 'unknown error';
 			if (err instanceof Error) message = err.message;
