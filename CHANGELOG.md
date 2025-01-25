@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/seleb/mastodon-archive-search/compare/v1.5.0...v1.5.1) (2025-01-25)
+
+
+### Bug Fixes
+
+* don't remove preloader until after indexing has started to avoid layout shift ([63df59a](https://github.com/seleb/mastodon-archive-search/commit/63df59a694770fa1d1a1c1e26035ffe705b92608))
+
 # [1.5.0](https://github.com/seleb/mastodon-archive-search/compare/v1.4.0...v1.5.0) (2025-01-25)
 
 
