@@ -122,7 +122,7 @@ function caseInsensitiveReplaceAll(
 		enhanceNodes(nodes, (text) =>
 			caseInsensitiveReplaceAll(text, [term], `<mark class="exact">$1</mark>`)
 		);
-		nodes = getTextNodesIn(source, true);
+		nodes = getTextNodesIn(source, true).filter((i) => i.textContent !== term);
 		enhanceNodes(nodes, (text) =>
 			caseInsensitiveReplaceAll(text, termTokens, `<mark>$1</mark>`)
 		);
