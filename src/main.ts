@@ -132,6 +132,7 @@ function caseInsensitiveReplaceAll(
 	let lastSearch = '';
 	const handleSearch = async () => {
 		const measureFull = measure('full');
+		const thisSearch = (lastSearch = nanoid());
 		try {
 			const q = elSearchInput.value;
 			if (q.length < 3) {
@@ -142,7 +143,6 @@ function caseInsensitiveReplaceAll(
 			}
 
 			const measureSearch = measure('search');
-			const thisSearch = (lastSearch = nanoid());
 			elList.classList.add('stale');
 			const result = (await Search.search(q)) as OrderedItem[];
 			measureSearch();
@@ -162,9 +162,12 @@ function caseInsensitiveReplaceAll(
 				result.sort((a, b) => a.published.localeCompare(b.published));
 			measureSort();
 
+			// eagerly add up to 50 items
+			const rendered = result.slice(0, 50);
+
 			const measureBuild = measure('build');
 			const fragment = document.createDocumentFragment();
-			result.map(renderItem).forEach(fragment.appendChild.bind(fragment));
+			rendered.map(renderItem).forEach(fragment.appendChild.bind(fragment));
 			measureBuild();
 
 			const measureHighlight = measure('highlight');
@@ -177,6 +180,19 @@ function caseInsensitiveReplaceAll(
 			elList.replaceChildren(fragment);
 			if (elCount) elCount.textContent = result.length.toString(10);
 			measureRender();
+
+			// lazily add more items
+			const onIdle = () => {
+				if (thisSearch !== lastSearch) return;
+				const next = result[rendered.length];
+				if (!next) return;
+				rendered.push(next);
+				const el = renderItem(next);
+				highlight(el, q);
+				elList.appendChild(el);
+				requestIdleCallback(onIdle);
+			};
+			requestIdleCallback(onIdle);
 		} catch (err) {
 			let message = 'unknown error';
 			if (err instanceof Error) message = err.message;
