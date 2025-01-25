@@ -103,6 +103,7 @@ function caseInsensitiveReplaceAll(
 		getTextNodes(node);
 		return textNodes;
 	}
+	const templateDiv = document.createElement('div');
 	const enhanceNodes = (
 		textNodes: Text[],
 		enhance: (text: string) => string
@@ -110,8 +111,9 @@ function caseInsensitiveReplaceAll(
 		textNodes.forEach((node) => {
 			const oldText = node.textContent;
 			const newText = enhance(oldText || '');
-			const fragment = document.createRange().createContextualFragment(newText);
-			node.replaceWith(fragment);
+			if (oldText === newText) return;
+			templateDiv.innerHTML = newText;
+			node.replaceWith(...Array.from(templateDiv.childNodes));
 		});
 	};
 	const highlight = (source: Element, term: string) => {
@@ -176,8 +178,8 @@ function caseInsensitiveReplaceAll(
 					const elImg = document.createElement('div');
 					elImg.innerHTML = img.name || '';
 					highlight(elImg, q);
-					elImg.innerHTML =
-						elImg.innerHTML || 'Media with no provided descriptive text';
+					if (!elImg.innerHTML)
+						elImg.textContent = 'Media with no provided descriptive text';
 					li.appendChild(elImg);
 				});
 				if (i.object.summary) {
