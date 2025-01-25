@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { error } from './logger';
 import { OrderedItem, Outbox } from './outbox';
+import { measure } from './perf';
 import { api as Search } from './search';
 import { get, set } from './Storage';
 import { tokenizer } from './tokenizer';
@@ -140,7 +141,9 @@ function caseInsensitiveReplaceAll(
 				return;
 			}
 
+			const measureSearch = measure('search');
 			const result = (await Search.search(q)) as OrderedItem[];
+			measureSearch();
 			if (thisSearch !== lastSearch) return;
 
 			if (!result.length) {
@@ -150,12 +153,15 @@ function caseInsensitiveReplaceAll(
 				return;
 			}
 
+			const measureSort = measure('sort');
 			const sort = elSort.value;
 			if (sort === 'latest first')
 				result.sort((a, b) => b.published.localeCompare(a.published));
 			else if (sort === 'oldest first')
 				result.sort((a, b) => a.published.localeCompare(b.published));
+			measureSort();
 
+			const measureRender = measure('render');
 			const fragment = document.createDocumentFragment();
 			result.forEach((i) => {
 				const li = document.createElement('li');
@@ -195,6 +201,7 @@ function caseInsensitiveReplaceAll(
 			elList.replaceChildren(fragment);
 			elList.classList.remove('stale');
 			if (elCount) elCount.textContent = result.length.toString(10);
+			measureRender();
 		} catch (err) {
 			let message = 'unknown error';
 			if (err instanceof Error) message = err.message;
