@@ -33,13 +33,22 @@ function caseInsensitiveReplaceAll(
 	const elSort = document.querySelector<HTMLSelectElement>('select');
 	const elList = document.querySelector<HTMLUListElement>('#results');
 	const elStats = document.querySelector<HTMLParagraphElement>('#stats');
+	const elControls = document.querySelector<HTMLDivElement>('#controls');
 	let elCount: HTMLSpanElement | null = null;
-	if (!elFileInput || !elSearchInput || !elSort || !elList || !elStats)
+	if (
+		!elFileInput ||
+		!elSearchInput ||
+		!elSort ||
+		!elList ||
+		!elStats ||
+		!elControls
+	)
 		throw new Error('could not find elements');
 
 	await Search.setUid('id');
 	const handleOutbox = async (outbox: Outbox) => {
 		const measureOutbox = measure('outbox');
+		elControls.classList.add('loading');
 		try {
 			const data = outbox.orderedItems
 				.filter(
@@ -84,6 +93,7 @@ function caseInsensitiveReplaceAll(
 				message || 'unknown error'
 			}</li>`;
 		} finally {
+			elControls.classList.remove('loading');
 			measureOutbox();
 		}
 	};

@@ -135,6 +135,20 @@ footer {
 	align-items: center;
 	justify-content: center;
 
+	&.loading {
+		opacity: 0.7;
+		cursor: wait;
+
+		>* {
+			pointer-events: none;
+		}
+
+		&::after {
+			content: 'Indexing posts...';
+			grid-column: span 2;
+		}
+	}
+
 	>label::after {
 		content: ':';
 	}
