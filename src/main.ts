@@ -173,11 +173,9 @@ function caseInsensitiveReplaceAll(
 				a.target = '_blank';
 				a.rel = 'noreferrer nofollow noopener';
 				li.innerHTML = i.object.content || '';
-				highlight(li, q);
 				i.object.attachment.forEach((img) => {
 					const elImg = document.createElement('div');
 					elImg.innerHTML = img.name || '';
-					highlight(elImg, q);
 					if (!elImg.innerHTML)
 						elImg.textContent = 'Media with no provided descriptive text';
 					li.appendChild(elImg);
@@ -186,7 +184,6 @@ function caseInsensitiveReplaceAll(
 					const details = document.createElement('details');
 					const summary = document.createElement('summary');
 					summary.innerHTML = i.object.summary || '';
-					highlight(summary, q);
 					details.innerHTML = li.innerHTML;
 					li.textContent = '';
 					details.prepend(summary);
@@ -200,6 +197,13 @@ function caseInsensitiveReplaceAll(
 				li.prepend(a);
 				fragment.appendChild(li);
 			});
+
+			const measureHighlight = measure('highlight');
+			Array.from(fragment.children).forEach((i) => {
+				highlight(i, q);
+			});
+			measureHighlight();
+
 			elList.replaceChildren(fragment);
 			elList.classList.remove('stale');
 			if (elCount) elCount.textContent = result.length.toString(10);
