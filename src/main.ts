@@ -24,7 +24,7 @@ function caseInsensitiveReplaceAll(
 	);
 }
 
-(async () => {
+export async function init() {
 	const elFileInput =
 		document.querySelector<HTMLInputElement>('input[type="file"]');
 	const elSearchInput = document.querySelector<HTMLInputElement>(
@@ -232,4 +232,4 @@ function caseInsensitiveReplaceAll(
 	});
 	elSearchInput.addEventListener('input', handleSearch);
 	elSort.addEventListener('change', handleSearch);
-})();
+}

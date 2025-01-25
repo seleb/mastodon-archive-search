@@ -6,7 +6,7 @@ if (!preloadEl) throw new Error('Could not find preloader element');
 (async () => {
 	const { init } = await import('./Storage');
 	await init();
-	await import('./main');
+	await (await import('./main')).init();
 	preloadEl.remove();
 })().catch((err) => {
 	error('failed to load', err);
