@@ -57,6 +57,7 @@
 		"eslint-plugin-import": "^2.27.5",
 		"js-search": "^2.0.1",
 		"localforage": "^1.10.0",
+		"nanoid": "^5.0.9",
 		"sass": "^1.71.0",
 		"typescript": "^5.0.4",
 		"vite": "^5.0.4"

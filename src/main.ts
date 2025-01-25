@@ -1,7 +1,9 @@
-import { Search } from 'js-search';
-import { get, set } from './Storage';
+import { nanoid } from 'nanoid';
 import { error } from './logger';
 import { OrderedItem, Outbox } from './outbox';
+import { api as Search } from './search';
+import { get, set } from './Storage';
+import { tokenizer } from './tokenizer';
 
 // based on https://stackoverflow.com/a/7313467
 function caseInsensitiveReplaceAll(
@@ -33,8 +35,8 @@ function caseInsensitiveReplaceAll(
 	if (!elFileInput || !elSearchInput || !elSort || !elList || !elStats)
 		throw new Error('could not find elements');
 
-	let search = new Search('id');
-	const handleOutbox = (outbox: Outbox) => {
+	await Search.setUid('id');
+	const handleOutbox = async (outbox: Outbox) => {
 		try {
 			const data = outbox.orderedItems
 				.filter(
@@ -61,16 +63,13 @@ function caseInsensitiveReplaceAll(
 				updated
 			).toDateString()}</time>`;
 			elCount = document.querySelector<HTMLSpanElement>('#count');
-			search = new Search('id');
-			search.tokenizer = {
-				tokenize(text: string) {
-					return text.split(/\s/).filter((i) => i);
-				},
-			};
-			search.addIndex(['object', 'content']);
-			search.addIndex(['object', 'summary']);
-			search.addIndex(['object', 'alt']);
-			search.addDocuments(data);
+			await Search.clear();
+			await Promise.all([
+				Search.addIndex(['object', 'content']),
+				Search.addIndex(['object', 'summary']),
+				Search.addIndex(['object', 'alt']),
+			]);
+			await Search.addDocuments(data);
 			set('outbox', outbox);
 			elSearchInput.value = '';
 			handleSearch();
@@ -115,7 +114,7 @@ function caseInsensitiveReplaceAll(
 		});
 	};
 	const highlight = (source: Element, term: string) => {
-		const termTokens = search.tokenizer.tokenize(term);
+		const termTokens = tokenizer.tokenize(term);
 		let nodes = getTextNodesIn(source, true);
 		enhanceNodes(nodes, (text) =>
 			caseInsensitiveReplaceAll(text, [term], `<mark class="exact">$1</mark>`)
@@ -126,28 +125,38 @@ function caseInsensitiveReplaceAll(
 		);
 	};
 
-	const handleSearch = () => {
+	let lastSearch = '';
+	const handleSearch = async () => {
 		try {
+			const thisSearch = (lastSearch = nanoid());
+			elList.classList.add('stale');
+
 			const q = elSearchInput.value;
-			Array.from(elList.children).forEach((i) => i.remove());
 			if (q.length < 3) {
 				elList.innerHTML =
 					'<li class="null">Search results will be displayed here</li>';
 				if (elCount) elCount.textContent = '0';
+				elList.classList.remove('stale');
 				return;
 			}
-			const result = search.search(q) as OrderedItem[];
+
+			const result = (await Search.search(q)) as OrderedItem[];
+			if (thisSearch !== lastSearch) return;
+
 			if (!result.length) {
 				elList.innerHTML = `<li class="null">No results found for search "${q}"</li>`;
 				if (elCount) elCount.textContent = '0';
+				elList.classList.remove('stale');
 				return;
 			}
+
 			const sort = elSort.value;
 			if (sort === 'latest first')
 				result.sort((a, b) => b.published.localeCompare(a.published));
 			else if (sort === 'oldest first')
 				result.sort((a, b) => a.published.localeCompare(b.published));
 
+			const fragment = document.createDocumentFragment();
 			result.forEach((i) => {
 				const li = document.createElement('li');
 				const a = document.createElement('a');
@@ -181,8 +190,10 @@ function caseInsensitiveReplaceAll(
 				elTime.dateTime = i.object.published;
 				a.appendChild(elTime);
 				li.prepend(a);
-				elList.appendChild(li);
+				fragment.appendChild(li);
 			});
+			elList.replaceChildren(fragment);
+			elList.classList.remove('stale');
 			if (elCount) elCount.textContent = result.length.toString(10);
 		} catch (err) {
 			let message = 'unknown error';

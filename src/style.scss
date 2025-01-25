@@ -152,6 +152,10 @@ footer {
 	margin-top: 1rem;
 	border-bottom: solid 1px var(--dark-glass);
 
+	&.stale {
+		opacity: 0.7;
+	}
+
 	li {
 		border-top: solid 1px var(--dark-glass);
 		padding: 0.25rem;
