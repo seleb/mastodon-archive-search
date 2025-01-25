@@ -131,19 +131,17 @@ function caseInsensitiveReplaceAll(
 	let lastSearch = '';
 	const handleSearch = async () => {
 		try {
-			const thisSearch = (lastSearch = nanoid());
-			elList.classList.add('stale');
-
 			const q = elSearchInput.value;
 			if (q.length < 3) {
 				elList.innerHTML =
 					'<li class="null">Search results will be displayed here</li>';
 				if (elCount) elCount.textContent = '0';
-				elList.classList.remove('stale');
 				return;
 			}
 
 			const measureSearch = measure('search');
+			const thisSearch = (lastSearch = nanoid());
+			elList.classList.add('stale');
 			const result = (await Search.search(q)) as OrderedItem[];
 			measureSearch();
 			if (thisSearch !== lastSearch) return;
@@ -151,7 +149,6 @@ function caseInsensitiveReplaceAll(
 			if (!result.length) {
 				elList.innerHTML = `<li class="null">No results found for search "${q}"</li>`;
 				if (elCount) elCount.textContent = '0';
-				elList.classList.remove('stale');
 				return;
 			}
 
@@ -205,7 +202,6 @@ function caseInsensitiveReplaceAll(
 			measureHighlight();
 
 			elList.replaceChildren(fragment);
-			elList.classList.remove('stale');
 			if (elCount) elCount.textContent = result.length.toString(10);
 			measureRender();
 		} catch (err) {
@@ -215,6 +211,8 @@ function caseInsensitiveReplaceAll(
 			elList.innerHTML = `<li class="null error">Failed to search: ${
 				message || 'unknown error'
 			}</li>`;
+		} finally {
+			elList.classList.remove('stale');
 		}
 	};
 
