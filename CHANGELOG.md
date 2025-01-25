@@ -1,3 +1,24 @@
+# [1.5.0](https://github.com/seleb/mastodon-archive-search/compare/v1.4.0...v1.5.0) (2025-01-25)
+
+
+### Bug Fixes
+
+* avoid exact + inexact highlight overlaps ([29c40be](https://github.com/seleb/mastodon-archive-search/commit/29c40beb64a5ddf67e6a5efec60eaab1507c95ed))
+* avoid immediate flicker on stale ([f13c12d](https://github.com/seleb/mastodon-archive-search/commit/f13c12d3e1d38959bd57cc23c174836d5024f5d3))
+* error case being flagged as stale ([bb2c1a6](https://github.com/seleb/mastodon-archive-search/commit/bb2c1a647e35d7bc3a7f2a01c467547cd1fdb041))
+* improve highlight performance ([e05647a](https://github.com/seleb/mastodon-archive-search/commit/e05647a0e3d923c0b85b2a2bf7589b9d60992ac4))
+* results showing all posts instead of 0 posts on load ([6e31bb4](https://github.com/seleb/mastodon-archive-search/commit/6e31bb47a75a88c4cbc5011c011fe0cebd1e6c04))
+* simplify highlight ([1efbeba](https://github.com/seleb/mastodon-archive-search/commit/1efbebaa94fa830de9ce67857cfdcfa87eef332d))
+* stable scroll gutters ([ed9b76c](https://github.com/seleb/mastodon-archive-search/commit/ed9b76c2373e4fbd2bc00a1fb88624e4708d2a9a))
+
+
+### Features
+
+* add web worker support to avoid blocking input while searching ([796f87a](https://github.com/seleb/mastodon-archive-search/commit/796f87ab21a4ce1f81f0fd161641c83934669aa4))
+* lazy-load search items to improve performance ([9dc0a9b](https://github.com/seleb/mastodon-archive-search/commit/9dc0a9b2f487b491b18225f9175994f2667eac95))
+* remove 3 character minimum ([bf412a1](https://github.com/seleb/mastodon-archive-search/commit/bf412a17240ea391dca543425d79ac4723ff5531))
+* show loading state while indexing posts ([f722cf7](https://github.com/seleb/mastodon-archive-search/commit/f722cf74127874adc4bc5a26ce5e7e480c1f2a56))
+
 # [1.4.0](https://github.com/seleb/mastodon-archive-search/compare/v1.3.7...v1.4.0) (2024-12-14)
 
 
