@@ -138,7 +138,7 @@ function caseInsensitiveReplaceAll(
 		const thisSearch = (lastSearch = nanoid());
 		try {
 			const q = elSearchInput.value;
-			if (q.length < 3) {
+			if (q.length < 1) {
 				elList.innerHTML =
 					'<li class="null">Search results will be displayed here</li>';
 				if (elCount) elCount.textContent = '0';
