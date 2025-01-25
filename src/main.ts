@@ -39,6 +39,7 @@ function caseInsensitiveReplaceAll(
 
 	await Search.setUid('id');
 	const handleOutbox = async (outbox: Outbox) => {
+		const measureOutbox = measure('outbox');
 		try {
 			const data = outbox.orderedItems
 				.filter(
@@ -74,7 +75,7 @@ function caseInsensitiveReplaceAll(
 			await Search.addDocuments(data);
 			set('outbox', outbox);
 			elSearchInput.value = '';
-			handleSearch();
+			await handleSearch();
 		} catch (err) {
 			let message = 'unknown error';
 			if (err instanceof Error) message = err.message;
@@ -82,6 +83,8 @@ function caseInsensitiveReplaceAll(
 			elList.innerHTML = `<li class="null error">Failed to load outbox: ${
 				message || 'unknown error'
 			}</li>`;
+		} finally {
+			measureOutbox();
 		}
 	};
 
