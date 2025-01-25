@@ -60,7 +60,7 @@ function caseInsensitiveReplaceAll(
 					'could not find any posts, double check that your outbox file is correct'
 				);
 			const updated = data[data.length - 1]?.object.published || 0;
-			elStats.innerHTML = `<span id="count">${data.length}</span> of ${
+			elStats.innerHTML = `<span id="count">${0}</span> of ${
 				data.length
 			} posts, latest: <time datatime="${updated}">${new Date(
 				updated
