@@ -130,6 +130,7 @@ function caseInsensitiveReplaceAll(
 
 	let lastSearch = '';
 	const handleSearch = async () => {
+		const measureFull = measure('full');
 		try {
 			const q = elSearchInput.value;
 			if (q.length < 3) {
@@ -160,7 +161,7 @@ function caseInsensitiveReplaceAll(
 				result.sort((a, b) => a.published.localeCompare(b.published));
 			measureSort();
 
-			const measureRender = measure('render');
+			const measureBuild = measure('build');
 			const fragment = document.createDocumentFragment();
 			result.forEach((i) => {
 				const li = document.createElement('li');
@@ -194,6 +195,7 @@ function caseInsensitiveReplaceAll(
 				li.prepend(a);
 				fragment.appendChild(li);
 			});
+			measureBuild();
 
 			const measureHighlight = measure('highlight');
 			Array.from(fragment.children).forEach((i) => {
@@ -201,6 +203,7 @@ function caseInsensitiveReplaceAll(
 			});
 			measureHighlight();
 
+			const measureRender = measure('render');
 			elList.replaceChildren(fragment);
 			if (elCount) elCount.textContent = result.length.toString(10);
 			measureRender();
@@ -213,6 +216,7 @@ function caseInsensitiveReplaceAll(
 			}</li>`;
 		} finally {
 			elList.classList.remove('stale');
+			measureFull();
 		}
 	};
 
