@@ -14,6 +14,8 @@
 		--extra-dark-glass: #{fade-out(#fff, 0.25)};
 		--light-glass: #{fade-out(#000, 0.8)};
 	}
+
+	scrollbar-gutter: stable;
 }
 
 $breakpoint: 40em;
