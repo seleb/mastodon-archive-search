@@ -6,6 +6,9 @@
 	"author": "Sean S. LeBlanc <sean.s.leblanc@gmail.com>",
 	"license": "MIT",
 	"type": "module",
+	"engines": {
+		"node": "24.x"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/seleb/mastodon-archive-search.git"
