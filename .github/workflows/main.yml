@@ -16,7 +16,7 @@ jobs:
   notify-start:
     runs-on: ubuntu-latest
     steps:
-      - uses: Ilshidur/action-discord@0.3.2
+      - uses: Ilshidur/action-discord@0.4.0
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{ "color": 16426275, "title": "deploying...", "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }]'
@@ -52,12 +52,12 @@ jobs:
     needs: [release]
     runs-on: ubuntu-latest
     steps:
-      - uses: Ilshidur/action-discord@0.3.2
+      - uses: Ilshidur/action-discord@0.4.0
         if: ${{ success() }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{ "color": 2357925, "title": "${{ needs.get-release.outputs.version }} deployed", "url": "https://seleb.github.io/mastodon-archive-search" }]'
-      - uses: Ilshidur/action-discord@0.3.2
+      - uses: Ilshidur/action-discord@0.4.0
         if: ${{ failure() }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
