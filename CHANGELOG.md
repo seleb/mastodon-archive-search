@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/seleb/mastodon-archive-search/compare/v1.5.1...v1.6.0) (2026-01-17)
+
+
+### Bug Fixes
+
+* common html entities (e.g. apostrophes) in post text unsearchable ([d437fd9](https://github.com/seleb/mastodon-archive-search/commit/d437fd9b8b0674df499e3344a7e8c0a394091ea1))
+
+
+### Features
+
+* add "prev" and "next" links ([fe80355](https://github.com/seleb/mastodon-archive-search/commit/fe80355439289b1eaf0f824b9a9aa16c0927f7fb))
+
 ## [1.5.1](https://github.com/seleb/mastodon-archive-search/compare/v1.5.0...v1.5.1) (2025-01-25)
 
 
