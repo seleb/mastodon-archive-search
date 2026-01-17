@@ -63,6 +63,11 @@ export async function init() {
 						...i.object,
 						alt: i.object.attachment.map((i) => i.name).join('|'),
 					},
+				}))
+				.map((i, idx, arr) => ({
+					...i,
+					prev: arr[idx - 1],
+					next: arr[idx + 1],
 				}));
 			if (!data.length)
 				throw new Error(

@@ -47,6 +47,8 @@ export interface OrderedItem {
 	};
 	signature?: Signature;
 	'@context': unknown;
+	next?: OrderedItem;
+	prev?: OrderedItem;
 }
 
 export interface Signature {

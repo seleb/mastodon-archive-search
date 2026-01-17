@@ -2,11 +2,23 @@ import { OrderedItem } from './outbox';
 
 export function renderItem(i: OrderedItem) {
 	const li = document.createElement('li');
-	const a = document.createElement('a');
-	a.title = 'open original';
-	a.href = i.object.id;
-	a.target = '_blank';
-	a.rel = 'noreferrer nofollow noopener';
+	const aOriginal = document.createElement('a');
+	aOriginal.title = 'open original';
+	aOriginal.href = i.object.id;
+	aOriginal.target = '_blank';
+	aOriginal.rel = 'noreferrer nofollow noopener';
+	const aPrev = document.createElement('a');
+	aPrev.title = 'open the post chronologically before this one';
+	aPrev.href = i.prev?.object.id || '';
+	aPrev.target = '_blank';
+	aPrev.rel = 'noreferrer nofollow noopener';
+	aPrev.textContent = '⮜';
+	const aNext = document.createElement('a');
+	aNext.title = 'open the post chronologically after this one';
+	aNext.href = i.next?.object.id || '';
+	aNext.target = '_blank';
+	aNext.rel = 'noreferrer nofollow noopener';
+	aNext.textContent = '⮞';
 	li.innerHTML = i.object.content || '';
 	i.object.attachment.forEach((img) => {
 		const elImg = document.createElement('div');
@@ -28,7 +40,9 @@ export function renderItem(i: OrderedItem) {
 	const elTime = document.createElement('time');
 	elTime.textContent = new Date(i.object.published).toDateString();
 	elTime.dateTime = i.object.published;
-	a.appendChild(elTime);
-	li.prepend(a);
+	aOriginal.appendChild(elTime);
+	if (aNext.href) li.prepend(aNext);
+	if (aPrev.href) li.prepend(aPrev);
+	li.prepend(aOriginal);
 	return li;
 }
