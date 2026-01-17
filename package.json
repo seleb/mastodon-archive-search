@@ -62,7 +62,7 @@
 		"localforage": "^1.10.0",
 		"nanoid": "^5.0.9",
 		"sass": "^1.71.0",
-		"typescript": "^5.0.4",
+		"typescript": "^5.9.3",
 		"vite": "^5.0.4"
 	}
 }
