@@ -1,18 +1,20 @@
+@use 'sass:color';
+
 :root {
 	color-scheme: light;
 	color: #000;
 	--light-gray: #ccc;
-	--dark-glass: #{fade-out(#000, 0.9)};
-	--extra-dark-glass: #{fade-out(#000, 0.25)};
-	--light-glass: #{fade-out(#fff, 0.7)};
+	--dark-glass: #{color.scale(#000, $alpha: -90%)};
+	--extra-dark-glass: #{color.scale(#000, $alpha: -25%)};
+	--light-glass: #{color.scale(#fff, $alpha: -70%)};
 
 	@media (prefers-color-scheme: dark) {
 		color-scheme: dark;
 		color: #fff;
 		--light-gray: #333;
-		--dark-glass: #{fade-out(#ccc, 0.8)};
-		--extra-dark-glass: #{fade-out(#fff, 0.25)};
-		--light-glass: #{fade-out(#000, 0.8)};
+		--dark-glass: #{color.scale(#ccc, $alpha: -80%)};
+		--extra-dark-glass: #{color.scale(#fff, $alpha: -25%)};
+		--light-glass: #{color.scale(#000, $alpha: -80%)};
 	}
 
 	scrollbar-gutter: stable;
@@ -35,8 +37,8 @@ body {
 }
 
 button,
-input[type="submit"],
-input[type="file"],
+input[type='submit'],
+input[type='file'],
 label {
 	cursor: pointer;
 }
@@ -45,7 +47,7 @@ label {
 	text-align: right;
 }
 
-input[type="search"],
+input[type='search'],
 select {
 	color: inherit;
 	display: block;
