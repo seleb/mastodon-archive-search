@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/seleb/mastodon-archive-search/compare/v1.6.0...v1.7.0) (2026-01-26)
+
+
+### Features
+
+* add index for hashtags ([97446b3](https://github.com/seleb/mastodon-archive-search/commit/97446b38ff6d9b5285ac9fd3d3702c2853a07715))
+
 # [1.6.0](https://github.com/seleb/mastodon-archive-search/compare/v1.5.1...v1.6.0) (2026-01-17)
 
 
