@@ -40,7 +40,7 @@ export interface OrderedItem {
 		replies: unknown;
 		sensitive: boolean;
 		summary: null | string;
-		tag: unknown[];
+		tag: { type: string; href: string; name: string }[];
 		to: string[];
 		type: string;
 		url: string;

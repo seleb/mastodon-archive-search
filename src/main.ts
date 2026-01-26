@@ -62,6 +62,9 @@ export async function init() {
 					object: {
 						...i.object,
 						alt: i.object.attachment.map((i) => i.name).join('|'),
+						tags: i.object.tag
+							.map((i) => `${i.name} ${i.name.replace('#', '')}`)
+							.join(' '),
 					},
 				}))
 				.map((i, idx, arr) => ({
@@ -85,6 +88,7 @@ export async function init() {
 				Search.addIndex(['object', 'content']),
 				Search.addIndex(['object', 'summary']),
 				Search.addIndex(['object', 'alt']),
+				Search.addIndex(['object', 'tags']),
 			]);
 			await Search.addDocuments(data);
 			set('outbox', outbox);
