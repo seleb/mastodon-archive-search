@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/seleb/mastodon-archive-search/compare/v1.7.0...v1.8.0) (2026-07-14)
+
+
+### Features
+
+* add support for multiple files ([f87d6bf](https://github.com/seleb/mastodon-archive-search/commit/f87d6bfde5877dc5de98a1dc1c794286ed3f8728))
+
 # [1.7.0](https://github.com/seleb/mastodon-archive-search/compare/v1.6.0...v1.7.0) (2026-01-26)
 
 
