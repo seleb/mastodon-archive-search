@@ -234,9 +234,19 @@ export async function init() {
 	}
 
 	elFileInput.addEventListener('change', async () => {
-		const file = elFileInput.files?.[0];
-		if (!file) return;
-		const outbox = JSON.parse(await file.text());
+		if (!elFileInput.files?.length) return;
+		const files = (
+			await Promise.all(Array.from(elFileInput.files).map((i) => i.text()))
+		).map((i) => JSON.parse(i) as Outbox);
+		const outbox = files.slice(1).reduce<Outbox>((acc, file) => {
+			if (!acc) return file;
+			return {
+				...acc,
+				totalItems: acc.totalItems + file.totalItems,
+				id: [acc.id, file.id].join(', '),
+				orderedItems: acc.orderedItems.concat(file.orderedItems),
+			};
+		}, files[0]);
 		handleOutbox(outbox);
 	});
 	elSearchInput.addEventListener('input', handleSearch);
